@@ -24,30 +24,30 @@
       }
     </style>
   </head>
-<body>
+<body ng-app="ShoppingListCheckOff">
   <div class="container">
     <h1>Shopping List Check Off</h1>
 
     <div class="row">
 
     <!-- To Buy List -->      
-      <div class="col-md-6" ng-controller='ToBuyController'>
+      <div class="col-md-6" ng-controller='ToBuyController as BoughttoList'>
         <h2>To Buy:</h2>
         <ul>          
-          <li ng-repeat="item in ShoppingListCheckOffService">Buy {{ item.quantity }} {{ item.name }}
-          <button ng-click="BoughttoList($index);">Bought</button>
+          <li ng-repeat="item in BoughttoList.itemsToBuy">Buy {{ item.quantity }} {{ item.name }}
+          <button ng-click="BoughttoList.addItem($index);">Bought</button>
           </li>          
         </ul>
-        <div class="emptyMessage" ng-if="ShoppingListCheckOffService.length === 0">Everything is bought!</div>
+        <div class="emptyMessage" ng-if="BoughttoList.itemsToBuy.length == 0">Everything is bought!</div>
       </div>
 
     <!-- Already Bought List -->
-      <div class="col-md-6" ng-controller='AlreadyBoughtController'>
+      <div class="col-md-6" ng-controller='AlreadyBoughtController as AlreadyBought'>
         <h2>Already Bought:</h2>
         <ul>
-          <li ng-show="item in itemsBought">Bought {{ item.quantity }} {{ item.name }}</li>
+          <li ng-repeat="item in AlreadyBought.itemsToBought">Bought {{ item.quantity }} {{ item.name }}</li>
         </ul>
-        <div class="emptyMessage" nf-show="itemsBought.length === 0">Nothing bought yet.</div>
+        <div class="emptyMessage" ng-if="AlreadyBought.itemsToBought == 0">Nothing bought yet.</div>
       </div>
     </div>
   </div>
